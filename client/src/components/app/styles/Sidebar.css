@@ -1,0 +1,91 @@
+.sidebar {
+    position: fixed;
+    width: 13%;
+    padding-left: 7%;
+    padding-right: 5%;
+    height: 95vh;
+}
+.sidebar__item {
+    display: flex;
+    transform: scale(1.2);
+    margin: 20px 10px 20px 0;
+    border-radius: 100px;
+    width: fit-content;
+}
+
+.sidebar__item:hover{
+    background-color: rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.sidebar__itemImage {
+    margin: 0 10px 0 10px;
+}
+
+.sidebar__itemTitle {
+    font-size: 16px;
+    margin: 10px 10px 10px 0;
+    font-family: ChirpRegular, sans-serif;
+}
+
+.sidebar__tweetButton {
+    background-color: rgba(29,161,242,1);
+    width: 100%;
+    align-self: center;
+    border-radius: 100px;
+    transform: scale(1.2);
+    display: flex;
+    justify-content: center;
+}
+.sidebar__tweetButton:hover {
+     background-color: rgb(25, 141, 210);
+     cursor: pointer;
+ }
+.sidebar__tweetButton > p {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    margin: 0;
+    padding: 10px ;
+    font-family: ChirpMedium, sans-serif;
+}
+
+.sidebar__profile {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    max-width: 80%;
+    min-width: 75%;
+    /*width: 80%;*/
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 100px;
+    padding: 10px 20px 10px 20px;
+    align-self: flex-end;
+}
+.sidebar__profile:hover {
+    background-color: rgba(0,0,0,0.2);
+    cursor: pointer;
+
+}
+.sidebar__profile >img {
+    height: 48px;
+    width: 48px;
+    border-radius: 24px;
+}
+.sidebar__profile > div {
+    margin: 0 10px 0 10px;
+    max-width: 80%;
+    overflow: hidden;
+}
+.sidebar__profile > div > p {
+    font-size: 15px;
+    font-family: ChirpMedium, sans-serif;
+    margin: 5px 0 5px 0;
+    white-space: nowrap;
+}
+
+.sidebar__profile > div > .name {
+    font-family: ChirpMedium, sans-serif;
+}

@@ -14,7 +14,7 @@ const LandingScreen = () => {
         document.title = 'Twitter - Home'
         pingServer().then(data => {
             console.log(data)
-            setText(data===true?'API rnning':'API not running')
+            setText(data===true?'API rjhbjhnning':'API not running')
         })
         // ReactGA.event('page_view',{ page_location:window.location.path,client_id:id});
     },[])
