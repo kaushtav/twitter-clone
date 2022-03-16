@@ -119,5 +119,3 @@ dist
 config.env
 .idea
 yarn.lock
-
-/node_modules/

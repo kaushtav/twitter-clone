@@ -1,33 +1,29 @@
 version: "3"
 services:
   client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+    image: client-dev
     ports:
       - "3000:3000"
-    container_name: client
     networks:
       -  mern-stack-net
     volumes:
-      -  ./client/src:/usr/app/src
-      -  ./client/public:/usr/app/public
+      -  ./client/:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - server
     stdin_open: true
     tty: true
 
   server:
-    build:
-      context: .
-      dockerfile: server/Dockerfile
+    image: server
     ports:
       - "4000:4000"
-    container_name: server
+    env_file: ./server/config.env
     networks:
       - mern-stack-net
     volumes:
-      - .:/usr/app
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - db
 
@@ -35,7 +31,6 @@ services:
     image: mongo
     ports:
       - "27017:27017"
-    container_name: mongo-db
     networks:
       - mern-stack-net
     volumes:

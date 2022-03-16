@@ -2,15 +2,13 @@
 FROM node:14-slim
 
 # Setting Working Directory
-WORKDIR /usr/app
+WORKDIR /usr/src/app
 
-# Copying only package.json
 COPY package*.json ./
+COPY ./yarn.lock ./
 
 # Install Dependencies
-RUN npm install
-
-RUN npm run build
+RUN yarn
 
 # Copy rest of the code to container
 COPY . .
@@ -18,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the React app
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

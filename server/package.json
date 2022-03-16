@@ -6,7 +6,7 @@
     "yarn": "1.22.17"
   },
   "scripts": {
-    "start": "../node_modules/.bin/nodemon ."
+    "start": "nodemon ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
