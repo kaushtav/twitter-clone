@@ -1,0 +1,24 @@
+{
+  "name": "twitterclone",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "yarn": "1.22.17"
+  },
+  "scripts": {
+    "start": "../node_modules/.bin/nodemon ."
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.2.6",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
