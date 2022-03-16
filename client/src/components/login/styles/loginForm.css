@@ -1,0 +1,102 @@
+.loginScreen__form {
+    background-color: white;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    padding: 2% 2%;
+    border-radius: 5px;
+    border: 1px #e7e7e7 solid;;
+}
+.loginScreen__form > h1 {
+    color: black;
+    font-weight: 400;
+    font-size: 28px;
+    padding-bottom: 15px;
+    margin: 0;
+    font-family: ChirpBold,sans-serif;
+}
+
+.loginScreen__form > input {
+    width: 20vw;
+    height: 20px;
+    max-width: 600px;
+    outline: none;
+    font-size: 1rem;
+    background: white;
+    color: black;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 0.25rem;
+    border-bottom: 2px solid #333;
+    transition: border-bottom 0.25s ease-out;
+    font-family: ChirpBold,sans-serif;
+}
+.loginScreen__form > button {
+    width: 50%;
+    color: white;
+    font-family: ChirpBold,sans-serif;
+    border:none;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background:rgba(29,161,242,1);;
+    padding: 10px;
+    max-width: 600px;
+    margin: 30px 0 5px 0;
+    align-self: center;
+ }
+.loginScreen__form > button:hover {
+
+      background-color: rgb(25, 141, 210);
+      cursor: pointer;
+  }
+.loginScreen__form > div >a {
+    color: black;
+    font-size: 0.8rem;
+    text-decoration: none;
+    font-family: ChirpBold,sans-serif;
+}
+.loginScreen__form > div >a:hover {
+    text-decoration: underline;
+}
+.loginScreen__form > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 30px 0;
+    align-items: center;
+}
+.loginScreen__form > div>div>span {
+    color: black;
+    font-size: 0.8rem;
+    font-family: ChirpBold,sans-serif;
+}
+.loginScreen__form > p {
+    color: black;
+    width: 20vw;
+    margin: 5px 0;
+    font-family: ChirpBold,sans-serif;
+}
+.loginScreen__form > p > span {
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    padding-left: 2px;
+    font-family: ChirpBold,sans-serif;
+}
+.loginScreen__form > p > span:hover {
+   text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+    .loginScreen__form {
+        height: 50vh;
+    }
+    .loginScreen__form > input {
+        width: 50vw;
+    }
+    .loginScreen__form > p {
+        color: #737373;
+        width: 50vw;
+        margin: 5px 0;
+    }
+}

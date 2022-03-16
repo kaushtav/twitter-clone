@@ -24,17 +24,6 @@ services:
     volumes:
       - ./server/:/usr/src/app
       - /usr/src/app/node_modules
-    depends_on:
-      - db
-
-  db:
-    image: mongo
-    ports:
-      - "27017:27017"
-    networks:
-      - mern-stack-net
-    volumes:
-      - mongo-data:/data/db
 
 networks:
   mern-stack-net:

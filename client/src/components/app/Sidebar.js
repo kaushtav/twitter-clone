@@ -3,6 +3,8 @@ import {SidebarItems} from '../../constants'
 import './styles/Sidebar.css'
 import {ReactComponent as TwitterIcon} from '../../assets/icons/twitter-icon.svg'
 import {ReactComponent as More} from '../../assets/icons/sidebar/more.svg'
+import {useUser} from '../../context/user'
+import {useNavigate} from "react-router-dom";
 
 const Item = ({image,title}) => {
     return (
@@ -12,14 +14,18 @@ const Item = ({image,title}) => {
         </div>
     )
 }
-const user = {
-    picture: 'https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640',
-    name: 'Kaushtav Atri',
-    handle: 'kaushtav'
-}
+
 
 
 const Sidebar = () => {
+    const {id,name,handle,handleLogout} = useUser()
+
+    const navigate = useNavigate();
+    const user = {
+        picture: 'https://pbs.twimg.com/profile_images/657118778707218432/t54TjLw6_400x400.jpg',
+        name: name,
+        handle: handle
+    }
     return(
         <div className={'sidebar'}>
             <TwitterIcon/>
@@ -27,7 +33,10 @@ const Sidebar = () => {
             <div className={'sidebar__tweetButton'}>
                 <p>Tweet</p>
             </div>
-            <div className={'sidebar__profile'}>
+            <div className={'sidebar__profile'} onClick={()=> {
+                handleLogout();
+                navigate('/')
+            }}>
                 <img src={user.picture} alt={'user'}/>
                 <div>
                     <p className={'name'}>{user.name}</p>

@@ -40,9 +40,13 @@
 }
 .tweet__content > span {
     font-family: ChirpRegular, sans-serif;
-    color: black;
+    color: #000000;
     font-weight: 300;
     font-size: 14px;
+}
+.tweet__content > img {
+    width: 100px;
+    height: 100px;
 }
 
 

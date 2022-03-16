@@ -1,21 +1,21 @@
-import './App.css';
-// import ReactGA from "react-ga4";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import LandingScreen from "./pages/LandingScreen";
-import HomeScreen from "./pages/HomeScreen"
-
+import {HomeScreen, LandingScreen,LoginScreen,SignUpScreen} from './pages'
+import {UserContextProvider} from "./context/user";
 
 
 function App() {
   return (
     <div className="App">
-        {/*<UserContextProvider>*/}
+        <UserContextProvider>
             <Router>
                 <Routes>
-                    <Route exact path={'/'} element={<HomeScreen/>}/>
+                    <Route exact path={'/'} element={<LandingScreen/>}/>
+                    <Route exact path={'/Home'} element={<HomeScreen/>}/>
+                    <Route exact path={'/signup'} element={<SignUpScreen/>}/>
+                    <Route exact path={'/login'} element={<LoginScreen/>}/>
                 </Routes>
             </Router>
-        {/*</UserContextProvider>*/}
+        </UserContextProvider>
     </div>
   );
 }

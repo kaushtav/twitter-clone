@@ -1,4 +1,7 @@
 import axios from "axios";
+import auth from './auth'
+import user from './user'
+import tweet from './tweet'
 
 const config = {
     headers: {
@@ -6,7 +9,7 @@ const config = {
     },
 };
 
-export const pingServer = async () => {
+const ping = async () => {
     try {
         let {data}  = await axios.get('api', config);
         return data
@@ -16,3 +19,5 @@ export const pingServer = async () => {
     }
 
 };
+
+export {auth, ping, user, tweet}

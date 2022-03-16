@@ -1,20 +1,24 @@
 import React, {useEffect, useState} from "react";
-import './LandingScreen.css'
-import {pingServer} from "../functions";
-// import {ArrowBackIos, ArrowForwardIos} from "@material-ui/icons";
-// import ReactGA from "react-ga4";
-// import {useUser} from "../helpers/context";
+import './styles/LandingScreen.css'
+import {ping} from "../functions";
+import {useNavigate} from "react-router-dom";
+import {useUser} from "../context/user";
 
 
 const LandingScreen = () => {
-    // const {id} = useUser()
+    const {id} = useUser()
     const [text, setText] = useState('hello')
 
+    const navigate = useNavigate();
     useEffect(()=>{
-        document.title = 'Twitter - Home'
-        pingServer().then(data => {
-            console.log(data)
-            setText(data===true?'API rjhbjhnning':'API not running')
+        if (localStorage.getItem('authToken')) {
+            navigate('/home')
+        }
+    },[navigate])
+    useEffect(()=>{
+        document.title = 'Twitter'
+        ping().then(data => {
+            setText(data===true?'API running':'API not running')
         })
         // ReactGA.event('page_view',{ page_location:window.location.path,client_id:id});
     },[])
