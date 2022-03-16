@@ -34,7 +34,9 @@ const Tweet = ({tweet}) => {
       <div className={'tweet'}>
           <img src={tweet.picture} alt={tweet.handle}/>
           <div className={'tweet__details'}>
-              <span>{tweet.name} @{tweet.handle} {tweet.timestamp}</span>
+              <span className={'tweet__userName'}>{tweet.name}</span>
+              <span> @{tweet.handle}</span>
+              <span>{'    '}5h</span>
               <div className={'tweet__content'}>
                   <span>{tweet.text}</span>
                   <span>{tweet.images[0]}</span>

@@ -19,14 +19,37 @@
 }
 
 
+.tweet__details {
+
+}
+.tweet__details > .tweet__userName{
+    font-family: ChirpBold, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+}
+.tweet__details > span{
+    font-family: ChirpRegular, sans-serif;
+    color: #5c5c5c;
+    font-size: 14px;
+}
 
 
+.tweet__content {
+    margin-top: 5px;
+}
+.tweet__content > span {
+    font-family: ChirpRegular, sans-serif;
+    color: black;
+    font-weight: 300;
+    font-size: 14px;
+}
 
 
 .tweet__footer {
     display: flex;
     justify-content: space-between;
-    margin:10px 0 10px 0;
+    margin:10px 0 10px -10px;
 }
 .tweet__footer > div {
     display: flex;
