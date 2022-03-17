@@ -25,7 +25,7 @@ export const SidebarItems = [
         image: MessagesIcon
     },
     {
-        title: 'Bookmark',
+        title: 'Bookmarks',
         image: BookmarksIcon
     },
     {

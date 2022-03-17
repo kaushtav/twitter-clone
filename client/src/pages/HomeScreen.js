@@ -18,9 +18,6 @@ TODO:
     9. Setup Navbar
     10. create hashtag logic? + explore page
     11. Search functionality across tweets?
-    12. Messaging?
-
-
 */
 
 
