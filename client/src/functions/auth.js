@@ -9,9 +9,9 @@ const config = {
 const signUp = async ({name, handle, email, password}) => {
     const {data} = await axios.post('/api/auth/signUp',{
         name, email, password,handle
-    },config)
+    },config);
     return data
-}
+};
 
-const auth = {signUp}
+const auth = {signUp};
 export default auth

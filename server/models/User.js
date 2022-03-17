@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
-
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -23,7 +21,6 @@ const UserSchema = new mongoose.Schema({
             /^[A-Za-z]+$/,
             'Please provide a valid email',
         ],
-
     },
     email: {
         type: String,
@@ -35,13 +32,24 @@ const UserSchema = new mongoose.Schema({
         ],
     },
     followers:{
-        type: Number
+        type: Number,
+        default:0,
+    },
+    followerList:{
+        type: Array,
+        default:[],
+    },
+    followingList:{
+        type: Array,
+        default:[],
     },
     following:{
-        type: Number
+        type: Number,
+        default:0,
     },
     tweets:{
-        type: Number
+        type: Number,
+        default:0,
     },
     picture:{
         type:String,

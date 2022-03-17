@@ -1,6 +1,9 @@
 import Sidebar from './Sidebar'
-import Tweet from './Tweet'
+import TweetMin from './TweetMin'
+import TweetsList from './TweetsList'
+import ProfileMin from "./ProfileMin";
+import ProfilesList from "./ProfilesList";
 
 
-export {Sidebar, Tweet};
+export {Sidebar, TweetsList, TweetMin, ProfileMin,ProfilesList};
 

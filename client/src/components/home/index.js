@@ -1,4 +1,4 @@
-import Tweets from './Tweets'
+import Main from './Main'
 import More from './More'
 
-export {Tweets,  More}
+export {Main,  More}

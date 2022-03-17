@@ -18,6 +18,17 @@ const getTweet = async (tweetID) => {
         return false
     }
 };
+const getTweets = async (tweetArray) => {
+    try {
+        if(!localStorage.getItem('authToken')){
+            return null
+        }
+        const {data} = await axios.post('/api/tweet/getTweets', {tweetArray},config);
+        return data
+    } catch (error) {
+        return false
+    }
+};
 
-const tweet = {getTweet}
+const tweet = {getTweet, getTweets};
 export default tweet;

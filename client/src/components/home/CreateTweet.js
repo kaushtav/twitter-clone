@@ -6,24 +6,22 @@ import {useUser} from '../../context/user'
 const CreteTweet = () => {
     const {picture} = useUser();
     const [images, setImages] = useState([]);
-    const [tweet, setTweet] = useState('');
+    const [text, setText] = useState('');
     
     const handleSubmit = async event => {
         event.preventDefault();
-        console.log()
-        if(!tweet&&!images.length) {
+        if(!text&&!images.length) {
             return false;
         }
-        user.createTweet(tweet, images)
+        await user.createTweet({text, images})
     }
     
     return(
         <form onSubmit={handleSubmit} className={'tweets__createTweet'} encType='multipart/form-data'>
             <img src={picture} alt={'user'}/>
-            <textarea name={'tweet'} value={tweet} placeholder={'What\'s happening?'} onChange={event => setTweet(event.target.value)}/>
+            <textarea name={'tweet'} value={text} placeholder={'What\'s happening?'} onChange={event => setText(event.target.value)}/>
             <input
                 type="file"
-                multiple
                 accept=".png, .jpg, .jpeg"
                 name="images"
                 className={'images'}

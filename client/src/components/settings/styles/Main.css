@@ -1,0 +1,7 @@
+.settings__main {
+    border-left: 1px rgb(231, 231, 231) solid;
+    border-right: 1px #e7e7e7 solid;
+    width: 40%;
+    margin-left: 25%;
+    min-height: 100vh;
+}

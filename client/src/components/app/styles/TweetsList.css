@@ -1,0 +1,10 @@
+.tweets {
+    border-left: 1px rgb(231, 231, 231) solid;
+    border-right: 1px #e7e7e7 solid;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+

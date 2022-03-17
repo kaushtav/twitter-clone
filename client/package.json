@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://server:4000",
+  "proxy": "http://server:4000",
   "engines": {
     "yarn": "1.22.17"
   },

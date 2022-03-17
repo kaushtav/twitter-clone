@@ -1,31 +1,17 @@
-.tweets {
-    border-left: 1px #e7e7e7 solid;
-    border-right: 1px #e7e7e7 solid;
-    width: 40%;
-    margin-left: 25%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.tweets__createTweet {
+.tweets__createReply {
     display: flex;
     position: relative;
-    flex-direction: column;
     min-width: 75%;
-    padding:20px 68px 20px 68px;
+    padding:20px 0 60px 68px;
+    border-bottom: 1px #e7e7e7 solid;
 }
-.tweets__createTweet > textarea {
-    width:100%;
-    height: 80px;
+.tweets__createReply > textarea {
+    width:80%;
+    height:80px;
     align-self: center;
     resize: none;
     outline: none;
-    border-bottom: 1px #e7e7e7 solid;
-    border-top:none;
-    border-left:none;
-    border-right:none;
+    border:none;
     background: white;
     /*border-color:white ;*/
     transition: border-bottom 0.25s ease-out;
@@ -34,8 +20,7 @@
     color: black;
     font-size: 18px;
 }
-.tweets__createTweet > img {
-
+.tweets__createReply > img {
     position: absolute;
     top: 20px;
     left: 10px;
@@ -43,31 +28,35 @@
     height: 48px;
     border-radius: 24px;
 }
-.tweets__createTweet .button {
+.tweets__createReply .button {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
     background-color: rgba(29,161,242,1);
     border: none;
     outline: none;
-    max-width: 25%;
-    align-self: flex-end;
+    width: 25%;
     padding: 10px 25px;
     color: white;
     border-radius: 25px;
     font-family: ChirpBold, sans-serif;
     font-weight: 600;
 }
-.tweets__createTweet .button:hover {
+.tweets__createReply .button:hover {
     background-color: rgb(25, 141, 210);
     cursor: pointer;
 }
 
-.tweets__createTweet .images {
+.tweets__createReply .images {
     background: url('../../../assets/icons/tweet/images.svg') no-repeat;
     border: 0;
     text-indent: -9999px;
     width: 24px;
     margin: 10px;
+    height: 24px;
+    border-radius: 10px;
 }
-.tweets__createTweet .images:hover {
-     cursor: pointer;
+.tweets__createReply .images:hover {
+    cursor: pointer;
     background-color: rgb(25, 141, 210,0.2);
- }
+}

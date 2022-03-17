@@ -52,4 +52,5 @@ exports.signUp = async (req, res, next) => {
         error.status = 403
         next(error);
     }
-}
+};
+

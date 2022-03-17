@@ -1,7 +1,13 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const {user} = require('../controllers')
+const {user} = require('../controllers');
 const {protect} = require('../middleware/auth');
 router.route("/").get(protect, user.getUser);
+router.route("/getProfile").post(protect, user.getProfile);
+router.route("/getProfiles").post(protect, user.getProfiles);
+router.route("/updateProfile").post(protect, user.updateProfile);
+router.route("/getHome").get(protect, user.getHome);
 router.route("/createTweet").post(protect, user.createTweet);
+router.route("/followUser").post(protect, user.followUser);
+router.route("/unfollowUser").post(protect, user.unfollowUser);
 module.exports = router;

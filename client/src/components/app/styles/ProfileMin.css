@@ -1,0 +1,37 @@
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 100px;
+    padding: 10px 20px 10px 20px;
+    /*background-color: yellow;*/
+    width: 90%;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.profile>div {
+    display: flex;
+}
+.profile>div >img {
+    height: 48px;
+    width: 48px;
+    border-radius: 24px;
+}
+.profile > div >div {
+    margin: 0 10px 0 10px;
+    max-width: 80%;
+    overflow: hidden;
+}
+.profile > div> div > p {
+    font-size: 15px;
+    font-family: ChirpMedium, sans-serif;
+    margin: 5px 0 5px 0;
+    white-space: nowrap;
+}
+
+.profile > div > div > .name {
+    font-family: ChirpMedium, sans-serif;
+    font-weight: 600;
+}

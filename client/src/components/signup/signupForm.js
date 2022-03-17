@@ -37,7 +37,6 @@ const SignupForm = () => {
         }
         auth.signUp({name, handle, email, password}).then((data) => {
             setError('')
-            console.log(data)
             localStorage.setItem('authToken', data.token);
             handleLogin(data.user)
             navigate('/')

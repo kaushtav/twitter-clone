@@ -23,27 +23,38 @@ const TweetSchema = new mongoose.Schema({
     },
     tags: {
         type:Array,
+        default:[]
     },
     mentions: {
         type:Array,
+        default:[]
     },
     timestamp: {
         type:Date,
+        default:Date.now(),
     },
     likes: {
         type:Number,
+        default:0
     },
     retweets: {
         type:Number,
+        default:0
     },
     replies: {
         type:Number,
+        default:0
     },
     repliedTo: {
         type:String
     },
+    repliedUser: {
+        type:String,
+        default:0
+    },
     repliesList: {
-        type: Array
+        type: Array,
+        default:[]
     }
 });
 
