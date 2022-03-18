@@ -11,6 +11,7 @@ COPY ./yarn.lock ./
 RUN npm install
 
 
+
 # Copy rest of the code to container
 COPY . .
 

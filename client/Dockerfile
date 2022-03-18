@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the React app
-CMD ["npm", "run","build"]
+CMD ["npm","run","build"]
