@@ -1,5 +1,5 @@
 # Pull the Node image from Docker Hub
-FROM --platform=linux/amd64 node:14.17.0-alpine
+FROM node:14-slim
 
 # Setting Working Directory
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY ./yarn.lock ./
 # Install Dependencies
-RUN npm install
+RUN yarn install
 
 
 
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 4000
 
 # Run the API on Nodemon
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

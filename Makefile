@@ -15,7 +15,7 @@ build-production:
 	cd server && $(MAKE) build
 
 run-production:
-	docker-compose -f docker-compose-production.yml up
+	docker-compose -f docker-compose-production.yaml up
 
 stop:
 	docker-compose down
