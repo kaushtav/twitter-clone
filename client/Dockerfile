@@ -8,7 +8,7 @@ COPY package*.json ./
 COPY ./yarn.lock ./
 
 # Install Dependencies
-RUN yarn
+RUN npm install
 
 # Copy rest of the code to container
 COPY . .
@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the React app
-CMD ["yarn", "start"]
+CMD ["npm","run","build"]

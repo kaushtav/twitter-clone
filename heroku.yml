@@ -1,0 +1,23 @@
+version: "3"
+services:
+  client:
+    image: client
+    ports:
+      - "3000:3000"
+    networks:
+      -  mern-stack-net
+    volumes:
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true
+
+  server:
+    image: server
+    ports:
+      - "4000:4000"
+    env_file: ./server/config.env
+    networks:
+      - mern-stack-net
+
+
