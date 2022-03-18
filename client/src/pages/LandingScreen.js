@@ -7,12 +7,15 @@ import {useUser} from "../context/user";
 
 const LandingScreen = () => {
     const {id} = useUser()
-    const [text, setText] = useState('hello')
+    const [text, setText] = useState('hello');
+
 
     const navigate = useNavigate();
     useEffect(()=>{
         if (localStorage.getItem('authToken')) {
             navigate('/home')
+        } else {
+            navigate('/login')
         }
     },[navigate])
     useEffect(()=>{
