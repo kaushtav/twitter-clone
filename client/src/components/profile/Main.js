@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './styles/Main.css'
 import ProfileBanner from "./ProfileBanner";
-import {TweetsList, ProfilesList} from "../app";
+import {TweetsList, ProfilesList, Header} from "../app";
 import {useUser} from "../../context/user";
 import {user} from "../../functions";
 
@@ -29,6 +29,7 @@ const Main = ({profile, tweets, followers}) => {
 
     return(
         <div className={'profile__main'}>
+            <Header text={'Profile'}/>
             <ProfileBanner
                 profile={profile}
                 following={following}

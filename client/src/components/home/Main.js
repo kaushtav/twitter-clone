@@ -1,14 +1,14 @@
 import React from 'react';
 
 import './styles/Main.css'
-import {TweetsList} from '../app'
+import {Header, TweetsList} from '../app'
 import CreateTweet from './CreateTweet'
 
-const Main = ({tweets}) => {
+const Main = ({tweets, reload}) => {
     return(
         <div className={'main'}>
-            <h2>Home</h2>
-            <CreateTweet/>
+            <div style={{height:'5vh'}}/>
+            <CreateTweet reload={reload}/>
             <TweetsList tweets={tweets}/>
         </div>
     )

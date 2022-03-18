@@ -1,0 +1,11 @@
+.more {
+    position: fixed;
+    top:10%;
+    right: 5%;
+    width: 25%;
+}
+.more > h3 {
+    font-family: ChirpBold;
+    width: 100%;
+    text-align: center;
+}

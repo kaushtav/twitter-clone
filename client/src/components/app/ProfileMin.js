@@ -13,7 +13,7 @@ const ProfileMin = ({user, button}) => {
                handleLogout();
                navigate('/')
            } else {
-               navigate(`/user/${user.id}`);
+               navigate(`/user/${user._id}`);
            }
        }}>
            <div>
@@ -23,7 +23,7 @@ const ProfileMin = ({user, button}) => {
                    <p>@{user.handle}</p>
                </div>
            </div>
-           <More style={{marginLeft:'20px'}} height={'20px'}/>
+           {button && <More style={{marginLeft: '20px'}} height={'20px'}/>}
        </div>
    )
 };

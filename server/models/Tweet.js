@@ -1,18 +1,7 @@
 const mongoose = require("mongoose");
 const TweetSchema = new mongoose.Schema({
-    userName: {
-        type: String,
-        required:true,
-    },
     userID: {
-        type: String,
-        required:true,
-    },
-    userPicture: {
-        type: String
-    },
-    userHandle: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required:true,
     },
     text: {
@@ -31,7 +20,6 @@ const TweetSchema = new mongoose.Schema({
     },
     timestamp: {
         type:Date,
-        default:Date.now(),
     },
     likes: {
         type:Number,
@@ -58,6 +46,6 @@ const TweetSchema = new mongoose.Schema({
     }
 });
 
-const Tweet = mongoose.model('tweets', TweetSchema)
+const Tweet = mongoose.model('tweets', TweetSchema);
 
 module.exports = Tweet;

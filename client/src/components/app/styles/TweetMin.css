@@ -37,6 +37,8 @@
 
 .tweet__content {
     margin-top: 5px;
+    display: flex;
+    flex-direction: column;
 }
 .tweet__content > span {
     font-family: ChirpRegular, sans-serif;
@@ -45,8 +47,10 @@
     font-size: 14px;
 }
 .tweet__content > img {
-    width: 100px;
-    height: 100px;
+    margin: 5% 0;
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 20px;
 }
 
 

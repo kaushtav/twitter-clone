@@ -3,7 +3,7 @@ import './styles/CreateTweet.css'
 import {user} from '../../functions'
 import {useUser} from '../../context/user'
 
-const CreteTweet = () => {
+const CreteTweet = ({reload}) => {
     const {picture} = useUser();
     const [images, setImages] = useState([]);
     const [text, setText] = useState('');
@@ -13,8 +13,9 @@ const CreteTweet = () => {
         if(!text&&!images.length) {
             return false;
         }
-        await user.createTweet({text, images})
-    }
+        await user.createTweet({text, images});
+        await reload();
+    };
     
     return(
         <form onSubmit={handleSubmit} className={'tweets__createTweet'} encType='multipart/form-data'>

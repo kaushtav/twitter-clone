@@ -7,16 +7,15 @@ import axios from "axios";
 
 const UpdateForm = () => {
     const navigate = useNavigate();
-    const {id, name, picture, email, handle, updateUser} = useUser();
-    const {handleLogin} = useUser();
+    const {name, picture, email, handle, updateUser} = useUser();
     const [emailData, setEmail] = useState(email);
     const [handleData, setHandle] = useState(handle);
     const [nameData, setName] = useState(name);
     const [pictureData, setPicture] = useState(picture);
     const [error, setError] = useState("");
 
-    const register = (e) => {
-        e.preventDefault()
+    const register = async event => {
+        event.preventDefault()
         if(!nameData) {
             setError('You must enter a name.');
             return false;
@@ -31,7 +30,10 @@ const UpdateForm = () => {
             setError('You must enter a valid handle.');
             return false;
         }
-        user.updateProfile({name:nameData, email:emailData, handle:handleData, picture:pictureData}).then(updateUser)
+        await user.updateProfile({name:nameData, email:emailData, handle:handleData, picture:pictureData})
+        updateUser();
+        navigate('/')
+
     };
 
     const uploadPicture = async event => {

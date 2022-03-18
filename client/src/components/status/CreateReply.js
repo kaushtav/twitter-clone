@@ -4,7 +4,6 @@ import {useUser} from "../../context/user";
 import {user} from "../../functions";
 
 const CreateReply = ({profile, tweet}) => {
-
     const {picture} = useUser();
     const [images, setImages] = useState([]);
     const [text, setText] = useState('');
@@ -14,7 +13,7 @@ const CreateReply = ({profile, tweet}) => {
         if(!text&&!images.length&&profile.handle) {
             return false;
         }
-        await user.createTweet({text, images, repliedUser:profile.handle, repliedTo:tweet.id})
+        await user.createTweet({text, images, repliedUser:profile.handle, repliedTo:tweet._id})
     };
 
     return(

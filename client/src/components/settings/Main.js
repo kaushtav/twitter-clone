@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 
 import './styles/Main.css'
 import UpdateForm from "./UpdateForm";
+import {Header} from "../app";
 
 const Main = () => {
-    const [view, setView] = useState('tweets');
     return(
         <div className={'settings__main'}>
-            <h2>Settings</h2>
+            <Header text={'Settings'}/>
             <UpdateForm/>
         </div>
     )

@@ -30,5 +30,38 @@ const getTweets = async (tweetArray) => {
     }
 };
 
-const tweet = {getTweet, getTweets};
+const likeTweet = async tweetID => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+    };
+    console.log('like')
+    try {
+        await axios.post('/api/tweet/likeTweet', {tweetID}, config);
+        return true
+    } catch (error) {
+        console.error(error);
+        return false
+    }
+};
+
+const unlikeTweet = async tweetID => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+    };
+    try {
+        await axios.post('/api/tweet/unlikeTweet', {tweetID}, config);
+        return true
+    } catch (error) {
+        console.error(error);
+        return false
+    }
+};
+
+const tweet = {getTweet, getTweets, likeTweet, unlikeTweet};
 export default tweet;

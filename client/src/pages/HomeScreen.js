@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './styles/HomeScreen.css'
-import {Main, More} from '../components/home'
-import {Sidebar} from '../components/app'
+import {Main} from '../components/home'
+import {Sidebar,More} from '../components/app'
 import {useNavigate} from "react-router-dom";
 import {user} from "../functions";
 
@@ -46,7 +46,7 @@ const HomeScreen = () => {
     return(
         <div className={'homeScreen'}>
             <Sidebar />
-            <Main tweets={tweetsData}/>
+            <Main tweets={tweetsData} reload={reload}/>
             <More/>
         </div>)
 };

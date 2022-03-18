@@ -1,5 +1,5 @@
 const {User,Tweet} = require("../models");
-const ErrorResponse = require('../utils/errorResponse');
+const mongoose = require("mongoose");
 
 exports.getUser = async (req, res, next)=>{
     return res.status(200).json({
@@ -8,26 +8,28 @@ exports.getUser = async (req, res, next)=>{
     });
 }
 exports.createTweet = async (req, res, next)=>{
-    const {text, images, repliedUser,repliedTo} = req.body.tweet;
-
+    const {text, images, repliedUser,repliedTo, retweetFrom} = req.body.tweet;
     //TODO: extract mentions and tags
     try {
         const {_id} = await Tweet.create({
-            userID:req.user.id,
-            userName:req.user.name,
-            userHandle:req.user.handle,
-            userPicture:req.user.picture,
-            user:req.user.name,
+            userID:mongoose.Types.ObjectId(req.user.id),
             text,
             images,
             repliedTo,
             repliedUser,
+            timestamp:Date.now()
         });
         if(repliedTo){
             const repliedTweet = await Tweet.findById(repliedTo);
             repliedTweet.replies++;
             repliedTweet.repliesList.push(_id);
             repliedTweet.save()
+        }
+        if(retweetFrom){
+            const reTweet = await Tweet.findById(retweetFrom);
+            reTweet.retweets++;
+            reTweet.save()
+
         }
         const user = await User.findById(req.user.id);
         user.tweets++;
@@ -40,85 +42,189 @@ exports.createTweet = async (req, res, next)=>{
     }
 };
 
+const rint = (a) => {
+  console.log(a)
+}
 
 exports.getHome = async (req, res, next)=> {
-    const tweets = await Tweet.find(
-        {},
-        {images:1, text:1, userName:1,userPicture:1,userHandle:1,replies:1, retweets:1,likes:1, timestamp:1},
-    ).sort({timestamp:-1});
+    const perPage = 100
+    const page = 1
+    const item = await Tweet.aggregate(
+        [
+            { $match: {userID : {$in : [...req.user.followingList, req.user._id]}}},
+            {$lookup: {
+                from: 'users',
+                localField:'userID',
+                foreignField:'_id',
+                as: "profile"
+                }},
+            {$unwind:"$profile"},
+            {$addFields:{"name":"$profile.name", "handle":"$profile.handle", "picture":"$profile.picture"}},
+            { $sort: { timestamp:-1 }},
+            { $project: {_id:1,
+                    images:1,
+                    text:1,
+                    userID:1,
+                    replies:1,
+                    retweets:1,
+                    likes:1,
+                    timestamp:1,
+                    name:1,
+                    handle:1,
+                    picture:1,
+                } },
+            { $facet: {
+                    metadata: [ { $count: "total" } ],
+                    data: [ { $skip: (page-1)*perPage }, { $limit: perPage } ]
+            }},
+        ]
+    );
     return res.status(200).json({
         success:true,
-        tweets
+        tweets:item[0].data,
+        metadata: item[0].metadata
     })
 };
 
 
 exports.getProfile = async (req, res, next)=> {
-    const {profileID} = req.body;
-    const profile = await User.findById(profileID);
-    const tweets = await Tweet.find({userID:profileID},
-        {images:1, text:1, userName:1,userPicture:1,userHandle:1,replies:1, retweets:1,likes:1, timestamp:1});
 
-    return res.status(200).json({
-        success:true,
-        profile,
-        tweets
-    })
+    const perPage = 100
+    const page =1
+    const {profileID} = req.body;
+    try{
+        const profile = await User.findById(profileID);
+        const item = await Tweet.aggregate(
+            [
+                { $match: {"userID" : profile._id}},
+                {$addFields:{"name":profile.name, "handle":profile.handle, "picture":profile.picture}},
+                { $sort: { timestamp:-1 }},
+                { $project: {_id:1,
+                        images:1,
+                        text:1,
+                        userID:1,
+                        replies:1,
+                        retweets:1,
+                        likes:1,
+                        timestamp:1,
+                        name:1,
+                        handle:1,
+                        picture:1,
+                    } },
+                { $facet: {
+                        metadata: [ { $count: "total" } ],
+                        data: [ { $skip: (page-1)*perPage }, { $limit: perPage } ]
+                    }},
+            ]
+        );
+
+        return res.status(200).json({
+            success:true,
+            profile,
+            tweets:item[0].data,
+            metadata:item[0].metadata
+        })
+    } catch (e) {
+        return res.status(403, e)
+    }
 };
 
 exports.getProfiles = async (req, res, next) => {
     const {profileArray} = req.body;
-    const profiles = await User.find(
-        {_id:{$in:profileArray}},
-        {handle:1,name:1,picture:1}
-    );
-    return res.status(200).json({
-        success:true,
-        profiles
-    })
+    try{
+        if (profileArray) {
+            const profiles = await User.find(
+                {_id: {$in: profileArray}},
+                {handle: 1, name: 1, picture: 1}
+            );
+            return res.status(200).json({
+                success: true,
+                profiles
+            })
+        }
+
+        const profiles = await User.find(
+            {_id: {$nin: [...req.user.followingList, req.user._id]}},
+            {handle: 1, name: 1, picture: 1}
+        );
+        return res.status(200).json({
+            success: true,
+            profiles
+        })
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            error:e.message
+        })
+
+    }
 
 };
 
 exports.updateProfile = async (req, res, next) => {
     const {profile} = req.body;
-    const user = await User.findById(req.user);
-    user.name = profile.name;
-    user.picture = profile.picture;
-    user.email = profile.email;
-    user.handle = profile.handle;
-    user.save()
-    return res.status(200).json({
-        success:true,
-    })
+    try {
+        const user = await User.findById(req.user);
+        user.name = profile.name;
+        user.picture = profile.picture;
+        user.email = profile.email;
+        user.handle = profile.handle;
+        user.save()
+        return res.status(200).json({
+            success: true,
+        })
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            error:e.message
+        })
+
+    }
 
 };
 
 exports.followUser = async (req, res, next) => {
     const {profileID} = req.body;
-    const profile = await User.findById(profileID);
-    profile.followers++;
-    profile.followerList.push(req.user._id);
-    profile.save();
-    const user = await User.findById(req.user._id);
-    user.following++;
-    user.followingList.push(profile._id);
-    user.save();
-    return res.status(200).json({
-        success:true,
-    })
+    try {
+        const profile = await User.findById(profileID);
+        profile.followers++;
+        profile.followerList.push(req.user._id);
+        profile.save();
+        const user = await User.findById(req.user._id);
+        user.following++;
+        user.followingList.push(profile._id);
+        user.save();
+        return res.status(200).json({
+            success: true,
+        })
+    }  catch (e) {
+        return res.status(500).json({
+            success: false,
+            error:e.message
+        })
+
+    }
 };
 
 exports.unfollowUser = async (req, res, next) => {
     const {profileID} = req.body;
-    const profile = await User.findById(profileID);
-    profile.followers--;
-    profile.followerList.remove(req.user._id);
-    profile.save();
-    const user = await User.findById(req.user._id);
-    user.following--;
-    user.followingList.remove(profile._id);
-    user.save();
-    return res.status(200).json({
-        success:true,
-    })
+    try{
+        const profile = await User.findById(profileID);
+        profile.followers--;
+        profile.followerList.remove(req.user._id);
+        profile.save();
+        const user = await User.findById(req.user._id);
+        user.following--;
+        user.followingList.remove(profile._id);
+        user.save();
+        return res.status(200).json({
+            success: true,
+        })
+    }  catch (e) {
+        return res.status(500).json({
+            success: false,
+            error:e.message
+        })
+
+    }
 };

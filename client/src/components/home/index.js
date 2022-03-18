@@ -1,4 +1,4 @@
 import Main from './Main'
-import More from './More'
+import More from '../app/More'
 
 export {Main,  More}

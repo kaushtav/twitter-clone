@@ -10,14 +10,16 @@ const StatusScreen = () => {
 
     const {tweetID} = useParams();
     const [tweetData, setTweetData] = useState({});
+    const [profileData, setProfileData] = useState({});
     const [tweetReplies, setTweetReplies] = useState({});
     const [loading, setLoading] = useState(true);
 
     const reload = async (id) => {
         setLoading(true);
         const {data} = await tweet.getTweet(id);
-        setTweetData(data);
-        const {tweets} = await tweet.getTweets(data.repliesList);
+        setTweetData(data.tweet);
+        setProfileData(data.user);
+        const {tweets} = await tweet.getTweets(data.tweet.repliesList);
         setTweetReplies(tweets);
         setLoading(false)
     };
@@ -31,7 +33,7 @@ const StatusScreen = () => {
     return(
         <div className={'statusScreen'}>
             <Sidebar />
-            <Main tweetData={tweetData} replies={tweetReplies}/>
+            <Main tweetData={tweetData} replies={tweetReplies} profileData={profileData}/>
         </div>)
 };
 
