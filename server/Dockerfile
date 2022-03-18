@@ -8,13 +8,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY ./yarn.lock ./
 # Install Dependencies
-RUN yarn
+RUN npm install
 
 
 # Copy rest of the code to container
-COPY .. .
+COPY . .
 
 EXPOSE 4000
 
 # Run the API on Nodemon
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
