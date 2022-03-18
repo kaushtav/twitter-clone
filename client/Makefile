@@ -1,2 +1,2 @@
-build-dev:
-	docker build -t client-dev -f Dockerfile .
+build:
+	docker build -t client -f Dockerfile .
