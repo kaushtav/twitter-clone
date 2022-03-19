@@ -9,6 +9,7 @@ COPY ./yarn.lock ./
 
 # Install Dependencies
 RUN yarn
+RUN yarn global add serve
 
 # Copy rest of the code to container
 COPY . .
@@ -16,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the React app
-CMD ["yarn", "start"]
+CMD ["yarn", "build"]

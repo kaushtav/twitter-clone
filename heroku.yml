@@ -18,5 +18,5 @@ release:
   image: web
 # The process types and commands to run
 run:
-  web: yarn add serve && serve -p $PORT -s build
+  web: serve -p $PORT -s build
   worker: yarn start
