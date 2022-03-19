@@ -1,23 +1,22 @@
-version: "3"
-services:
-  client:
-    image: client
-    ports:
-      - "3000:3000"
-    networks:
-      -  mern-stack-net
-    volumes:
-    depends_on:
-      - server
-    stdin_open: true
-    tty: true
-
-  server:
-    image: server
-    ports:
-      - "4000:4000"
-    env_file: ./server/config.env
-    networks:
-      - mern-stack-net
-
-
+# Resources to provision on app creation
+#setup:
+#  addons:
+#    - plan: heroku-postgresql
+#      as: DATABASE
+#  config:
+#    S3_BUCKET: my-example-bucket
+# Reference the Dockerfiles to build into Docker images 
+build:
+  docker:
+    web: client/Dockerfile
+    worker: server/Dockerfile
+# Run a command on each release 
+release:
+  command:
+    - yarn start
+  # Use the worker image to execute the release command
+  image: worker
+# The process types and commands to run
+run:
+  web: yarn build
+  worker: yarn start
