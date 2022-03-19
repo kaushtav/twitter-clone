@@ -12,5 +12,5 @@ build:
     worker: server/Dockerfile
 # Run a command on each release
 run:
-  web: yarn build && serve -s build
+  web: yarn build && yarn add serve && serve -s build
   worker: yarn start
