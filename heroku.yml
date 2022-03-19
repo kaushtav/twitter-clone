@@ -10,13 +10,7 @@ build:
   docker:
     web: client/Dockerfile
     worker: server/Dockerfile
-# Run a command on each release 
-release:
-  command:
-    - yarn start
-  # Use the worker image to execute the release command
-  image: worker
-# The process types and commands to run
+# Run a command on each release
 run:
-  web: yarn build
+  web: yarn build && serve -s build
   worker: yarn start
