@@ -2,9 +2,6 @@
   "name": "twitterclone",
   "version": "0.0.1",
   "private": true,
-  "engines": {
-    "yarn": "1.22.17"
-  },
   "scripts": {
     "start": "nodemon ."
   },

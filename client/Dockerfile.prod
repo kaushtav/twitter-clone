@@ -1,5 +1,5 @@
 # Pull the Node image from Docker Hub
-FROM node:14-slim
+FROM node:14-slim as build-stage
 
 # Setting Working Directory
 WORKDIR /usr/src/app
@@ -9,11 +9,12 @@ COPY ./yarn.lock ./
 
 # Install Dependencies
 RUN yarn
+RUN yarn build
 
 # Copy rest of the code to container
 COPY . .
 
+FROM nginx:1.17.0-alpine
+COPY --from=build-stage /client/build /usr/share/nginx/html
 EXPOSE 3000
-
-# Run the React app
-CMD ["yarn", "start"]
+CMD nginx -g 'daemon off;'

@@ -1,21 +1,21 @@
 ### DEV
 
 build-dev:
-	cd client && $(MAKE) build
-	cd server && $(MAKE) build
+	cd client && $(MAKE) build-dev
+	cd server && $(MAKE) build-dev
 
 run-dev:
-	docker-compose -f docker-compose.yaml up
+	docker-compose -f docker-compose-dev.yaml up
 
 ### LOCAL (prod config)
 
 
-build-production:
-	cd client && $(MAKE) build
-	cd server && $(MAKE) build
+build-prod:
+	cd client && $(MAKE) build-prod
+	cd server && $(MAKE) build-prod
 
-run-production:
-	docker-compose -f docker-compose-production.yaml up
+run-prod:
+	docker-compose -f docker-compose-prod.yaml up -d
 
 stop:
 	docker-compose down
