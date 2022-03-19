@@ -8,6 +8,8 @@ const logger = require('morgan');
 const connectDB = require('./database/db')
 const { getRoutes } = require('./routes');
 
+const cors = require('cors')
+
 connectDB().then();
 
 const app = express();
@@ -18,20 +20,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
+app.use(cors())
 
 
 app.use('/api', getRoutes());
+console.log(process.env.NODE_ENV)
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,'..', 'client', 'build', 'index.html'));
-  });
-} else {
+// if (process.env.NODE_ENV === 'production') {
+//   console.log(process.env.NODE_ENV)
+//
+//   app.use(express.static(path.join(__dirname, '../client/build')));
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname,'..', 'client', 'build', 'index.html'));
+//   });
+// } else {
   app.get('/', (req, res) => {
     res.send('Api running');
   });
-}
+// }
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

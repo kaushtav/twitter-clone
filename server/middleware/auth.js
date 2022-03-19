@@ -14,7 +14,6 @@ exports.protect = async(req, res, next) =>{
         return next(new ErrorResponse('Not authorized to access this route', 401));
     }
     try{
-        res.header({"Access-Control-Allow-Origin": "*"});
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.id);
         if(!user){

@@ -9,7 +9,7 @@ COPY ./yarn.lock ./
 
 # Install Dependencies
 RUN yarn
-
+ENV REACT_APP_BASE_URL=http://localhost:4000
 # Copy rest of the code to container
 COPY . .
 

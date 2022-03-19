@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './styles/loginForm.css'
 import {useNavigate} from "react-router-dom";
 import {useUser} from "../../context/user";
-import axios from "axios";
+import {api} from "../../functions";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const LoginForm = () => {
             setError('You must enter a password.')
             return false;
         }
-        axios.post('/api/auth/signIn', {
+        api.post('/api/auth/signIn', {
             handle, password
         }).then((res)=> {
             localStorage.setItem('authToken', res.data.token);

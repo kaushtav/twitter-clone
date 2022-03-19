@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import './styles/signupForm.css'
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import {auth} from '../../functions'
 import {useUser} from "../../context/user";
 // import ReactGA from "react-ga4";

@@ -1,4 +1,4 @@
-import axios from "axios";
+import {api} from "./index";
 
 const config = {
     headers: {
@@ -7,7 +7,7 @@ const config = {
 };
 
 const signUp = async ({name, handle, email, password}) => {
-    const {data} = await axios.post('/api/auth/signUp',{
+    const {data} = await api.post('/api/auth/signUp',{
         name, email, password,handle
     },config);
     return data

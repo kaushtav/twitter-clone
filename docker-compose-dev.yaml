@@ -28,7 +28,3 @@ services:
 networks:
   mern-stack-net:
     driver: bridge
-
-volumes:
-  mongo-data:
-    driver: local

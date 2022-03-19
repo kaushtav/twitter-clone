@@ -1,4 +1,4 @@
-import axios from "axios";
+import {api} from "./index";
 
 const config = {
     headers: {
@@ -12,7 +12,7 @@ const getTweet = async (tweetID) => {
         if(!localStorage.getItem('authToken')){
             return null
         }
-        const { data } = await axios.post('/api/tweet/getTweet', {tweetID},config);
+        const { data } = await api.post('/api/tweet/getTweet', {tweetID},config);
         return data
     } catch (error) {
         return false
@@ -23,7 +23,7 @@ const getTweets = async (tweetArray) => {
         if(!localStorage.getItem('authToken')){
             return null
         }
-        const {data} = await axios.post('/api/tweet/getTweets', {tweetArray},config);
+        const {data} = await api.post('/api/tweet/getTweets', {tweetArray},config);
         return data
     } catch (error) {
         return false
@@ -39,7 +39,7 @@ const likeTweet = async tweetID => {
     };
     console.log('like')
     try {
-        await axios.post('/api/tweet/likeTweet', {tweetID}, config);
+        await api.post('/api/tweet/likeTweet', {tweetID}, config);
         return true
     } catch (error) {
         console.error(error);
@@ -55,7 +55,7 @@ const unlikeTweet = async tweetID => {
         },
     };
     try {
-        await axios.post('/api/tweet/unlikeTweet', {tweetID}, config);
+        await api.post('/api/tweet/unlikeTweet', {tweetID}, config);
         return true
     } catch (error) {
         console.error(error);

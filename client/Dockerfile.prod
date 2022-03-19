@@ -9,12 +9,22 @@ COPY ./yarn.lock ./
 
 # Install Dependencies
 RUN yarn
-RUN yarn build
 
 # Copy rest of the code to container
 COPY . .
+RUN yarn build
 
-FROM nginx:1.17.0-alpine
-COPY --from=build-stage /client/build /usr/share/nginx/html
-EXPOSE 3000
-CMD nginx -g 'daemon off;'
+
+
+### Second Stage ###
+FROM caddy:2.1.1
+
+ARG CADDYFILE
+COPY ${CADDYFILE} /etc/caddy/Caddyfile
+
+COPY --from=build-stage /usr/src/app/build/ /srv
+
+EXPOSE 80
+
+EXPOSE 443
+

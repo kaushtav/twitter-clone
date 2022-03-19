@@ -1,28 +1,31 @@
 version: "3"
 services:
   client:
-    image: client-prod
+    image: client-prod:${ENV}
+    restart: unless-stopped
     ports:
-      - "3000:3000"
-    networks:
-      -  mern-stack-net
-    depends_on:
-      - server
-    stdin_open: true
-    tty: true
-
-  server:
-    image: server
-    ports:
-      - "4000:4000"
-    env_file: ./server/config.env
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
     networks:
       - mern-stack-net
-
+  server:
+    image: server
+    restart: unless-stopped
+    env_file: ./server/config/${ENV}.env
+    ports:
+      - "4000:4000"
+    networks:
+      - mern-stack-net
 networks:
   mern-stack-net:
     driver: bridge
-
 volumes:
   mongo-data:
+    driver: local
+  caddy-data:
+    driver: local
+  caddy-config:
     driver: local

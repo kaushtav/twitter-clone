@@ -3,6 +3,13 @@ import auth from './auth'
 import user from './user'
 import tweet from './tweet'
 
+const baseURL = process.env.REACT_APP_BASE_URL
+console.log(process.env.REACT_APP_BASE_URL)
+
+const api = axios.create({
+    baseURL
+})
+
 const config = {
     headers: {
         'Content-Type': 'application/json',
@@ -11,7 +18,7 @@ const config = {
 
 const ping = async () => {
     try {
-        let {data}  = await axios.get('api', config);
+        let {data}  = await api.get('api', config);
         return data
     } catch (e) {
         console.log(e);
@@ -20,4 +27,4 @@ const ping = async () => {
 
 };
 
-export {auth, ping, user, tweet}
+export {api,auth, ping, user, tweet}
