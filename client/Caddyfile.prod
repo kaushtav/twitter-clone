@@ -1,0 +1,9 @@
+13.233.216.132:443 {
+  tls kaushtav@mylastpage.in
+  root * /srv
+  route {
+    reverse_proxy /api* server:4000
+    try_files {path} {path}/ /index.html
+    file_server
+  }
+}

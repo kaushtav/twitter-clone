@@ -22,7 +22,7 @@ build-prod:
 	cd server && $(MAKE) build
 
 run-prod:
-	ENV=production docker-compose -f docker-compose-prod.yaml up
+	ENV=prod docker-compose -f docker-compose-prod.yaml up
 
 stop:
 	docker-compose -f docker-compose-prod.yaml down && docker-compose -f docker-compose-dev.yaml down
