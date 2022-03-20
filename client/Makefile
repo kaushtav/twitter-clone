@@ -8,7 +8,7 @@ build-local:
     		--build-arg BASE_URL=http://localhost:4000/ \
     		-f Dockerfile.prod .
 
-build-prod:
+build-production:
 	docker build \
 		-t client-prod:prod \
 		--build-arg CADDYFILE=Caddyfile.prod \
