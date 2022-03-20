@@ -97,9 +97,8 @@ exports.unlikeTweet = async (req, res, next) => {
     try{
         const profile = await User.findById(req.user._id);
         if(!profile.likedList.includes(tweetID)){
-            return next(new ErrorResponse('Already not liked', 409));
+            return next(new ErrorResponse('Already Liked', 409));
         }
-        profile.likedLi
         profile.likedList.remove(tweetID);
         profile.save();
         const tweet = await Tweet.findById(tweetID);
