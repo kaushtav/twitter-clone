@@ -71,6 +71,9 @@ exports.likeTweet = async (req, res, next) => {
     const {tweetID} = req.body;
     try {
         const profile = await User.findById(req.user._id);
+        if(profile.likedList.includes(tweetID)){
+            return next(new ErrorResponse('Already Liked', 409));
+        }
         profile.likedList.push(tweetID);
         profile.save();
         const tweet = await Tweet.findById(tweetID);
@@ -93,6 +96,10 @@ exports.unlikeTweet = async (req, res, next) => {
     const {tweetID} = req.body;
     try{
         const profile = await User.findById(req.user._id);
+        if(profile.likedList.includes(tweetID)){
+            return next(new ErrorResponse('Already not liked', 409));
+        }
+        profile.likedLi
         profile.likedList.remove(tweetID);
         profile.save();
         const tweet = await Tweet.findById(tweetID);

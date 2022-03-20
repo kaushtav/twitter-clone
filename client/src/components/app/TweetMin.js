@@ -12,7 +12,7 @@ import ReactTooltip from "react-tooltip";
 
 const TweetMin = ({tweet, retweet, reply}) => {
     const navigate = useNavigate();
-    const {likedList, retweetList} = useUser();
+    const {likedList, retweetList, updateUser} = useUser();
     const likeCheck = likedList.includes(tweet._id);
     const retweetCheck = retweetList.includes(tweet._id);
     const [liked, setLiked] = useState(likeCheck)
@@ -21,6 +21,7 @@ const TweetMin = ({tweet, retweet, reply}) => {
     const handleLike = () => {
         liked?tweet.likes--:tweet.likes++;
         liked?tweetFunc.unlikeTweet(tweet._id):tweetFunc.likeTweet(tweet._id);
+        updateUser()
         setLiked(!liked)
     };
 
@@ -28,6 +29,7 @@ const TweetMin = ({tweet, retweet, reply}) => {
         if(retweeted) {return false}
         user.createTweet({text:tweet.text, images:tweet.images,retweetFrom:tweet._id}).then(()=>{
             tweet.retweets++
+            updateUser();
             setRetweeted(true)
         })
     }
