@@ -3,7 +3,7 @@ import './styles/CreateReply.css'
 import {useUser} from "../../context/user";
 import {user} from "../../functions";
 
-const CreateReply = ({profile, tweet}) => {
+const CreateReply = ({profile, tweet, reload}) => {
     const {picture} = useUser();
     const [images, setImages] = useState([]);
     const [text, setText] = useState('');
@@ -14,6 +14,7 @@ const CreateReply = ({profile, tweet}) => {
             return false;
         }
         await user.createTweet({text, images, repliedUser:profile.handle, repliedTo:tweet._id})
+        await reload()
     };
 
     return(
@@ -33,6 +34,7 @@ const CreateReply = ({profile, tweet}) => {
                     setImages(e.target.files)
                 }}
             />
+            {images.length>0&&<span>Image uploaded.</span>}
             <input className={'button'} type={'submit'} value={'Reply'}/>
         </form>
     )

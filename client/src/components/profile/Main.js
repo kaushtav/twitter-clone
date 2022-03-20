@@ -6,7 +6,7 @@ import {useUser} from "../../context/user";
 import {user} from "../../functions";
 
 const Main = ({profile, tweets, followers}) => {
-    const {id,name,handle,picture, followingList,} = useUser();
+    const {id,name,handle,picture, followingList,updateUser} = useUser();
     const followCheck = followingList.includes(profile._id);
     const [following, setFollowing] = useState(followCheck);
     const [view, setView] = useState('tweets');
@@ -15,6 +15,7 @@ const Main = ({profile, tweets, followers}) => {
         user.followUser(profile._id).then(() => {});
         followers.push({_id:id,name,handle,picture});
         profile.followers++;
+        updateUser();
         setFollowing(true)
     };
     const handleUnfollow = async ()=> {
@@ -24,6 +25,7 @@ const Main = ({profile, tweets, followers}) => {
             return item._id
         }).indexOf(id);
         followers.splice(index, 1);
+        updateUser();
         setFollowing(false)
     };
 

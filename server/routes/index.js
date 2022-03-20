@@ -1,7 +1,6 @@
 let express = require('express');
-let router = express.Router();
 
-const ping = async (req, res, next) => {
+const ping = async (req, res) => {
   return res.status(200).send(true)
 }
 

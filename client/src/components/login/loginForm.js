@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './styles/loginForm.css'
 import {useNavigate} from "react-router-dom";
 import {useUser} from "../../context/user";
-import {api} from "../../functions";
+import {auth} from "../../functions";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -20,14 +20,13 @@ const LoginForm = () => {
             setError('You must enter a password.')
             return false;
         }
-        api.post('/api/auth/signIn', {
-            handle, password
-        }).then((res)=> {
-            localStorage.setItem('authToken', res.data.token);
-            handleLogin(res.data.user)
+        auth.signIn({handle, password}).then((data)=> {
+            localStorage.setItem('authToken', data.token);
+            handleLogin(data.user)
             navigate('/')
         }).catch((error) => {
-            setError(error)
+            console.error(error.message)
+            setError("Wrong username/password")
         })
     }
   return(
@@ -45,12 +44,10 @@ const LoginForm = () => {
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
           />
+          <p id={'loginScreen__error'}>{error}</p>
           <button onClick={()=>userLogin()}>Sign In</button>
-          <p>New to Amazon?
+          <p>New to Twitter?
               <span onClick={()=>{navigate('/signup')}}>Sign up now</span>
-          </p>
-          <p style={{color:'black'}}>{error}</p>
-          <p style={{fontSize:'0.8rem', fontFamily: 'ChirpBold'}}>By continuing, you agree to Twitter's Conditions of Use and Privacy Notice.
           </p>
       </div>
   )

@@ -20,6 +20,14 @@
     color: black;
     font-size: 18px;
 }
+.tweets__createReply > span {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    font-family: ChirpBold, sans-serif;
+    font-size: 12px;
+    margin: 10px;
+}
 .tweets__createReply > img {
     position: absolute;
     top: 20px;

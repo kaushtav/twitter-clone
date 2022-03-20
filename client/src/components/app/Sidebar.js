@@ -1,5 +1,5 @@
 import React from 'react';
-import {SidebarItems} from '../../constants'
+import {SidebarItems} from '../../context/constants'
 import './styles/Sidebar.css'
 import {ReactComponent as TwitterIcon} from '../../assets/icons/twitter-icon.svg'
 import {useUser} from '../../context/user'
@@ -15,8 +15,6 @@ const Item = ({image,title, link}) => {
         </div>
     )
 }
-
-
 
 const Sidebar = () => {
     const {name,handle, picture} = useUser();

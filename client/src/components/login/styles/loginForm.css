@@ -83,6 +83,11 @@
     padding-left: 2px;
     font-family: ChirpBold,sans-serif;
 }
+#loginScreen__error {
+    color: black;
+    font-family: 'ChirpRegular', sans-serif;
+    font-size:14px;
+}
 .loginScreen__form > p > span:hover {
    text-decoration: underline;
 }

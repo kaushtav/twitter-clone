@@ -19,7 +19,7 @@ const CreteTweet = ({reload}) => {
     
     return(
         <form onSubmit={handleSubmit} className={'tweets__createTweet'} encType='multipart/form-data'>
-            <img src={picture} alt={'user'}/>
+            <img className={'profilePic'} src={picture} alt={'user'}/>
             <textarea name={'tweet'} value={text} placeholder={'What\'s happening?'} onChange={event => setText(event.target.value)}/>
             <input
                 type="file"
@@ -29,9 +29,12 @@ const CreteTweet = ({reload}) => {
                 onChange={(e) => {
                     e.preventDefault()
                     setImages(e.target.files)
+                    console.log(e.target.files)
                 }}
             />
+            {images.length>0&&<span>Image uploaded.</span>}
             <input className={'button'} type={'submit'} value={'Tweet'}/>
+
         </form>
     )
 }

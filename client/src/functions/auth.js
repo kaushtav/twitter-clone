@@ -13,5 +13,12 @@ const signUp = async ({name, handle, email, password}) => {
     return data
 };
 
-const auth = {signUp};
+const signIn = async ({handle, password}) => {
+    const {data} = await api.post('/api/auth/signIn', {
+        handle, password
+    },config)
+    return data
+};
+
+const auth = {signUp, signIn};
 export default auth

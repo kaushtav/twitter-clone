@@ -14,7 +14,7 @@ services:
   server:
     image: server
     restart: unless-stopped
-    env_file: ./server/config/${ENV}.env
+    env_file: ./server/config.env
     ports:
       - "4000:4000"
     networks:

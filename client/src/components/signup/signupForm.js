@@ -3,7 +3,6 @@ import './styles/signupForm.css'
 import {useNavigate} from "react-router-dom";
 import {auth} from '../../functions'
 import {useUser} from "../../context/user";
-// import ReactGA from "react-ga4";
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -21,7 +20,6 @@ const SignupForm = () => {
             return false;
         }
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
         if(!email||!re.test(email)) {
             setError('You must enter a valid email address.')
             return false;
@@ -38,8 +36,9 @@ const SignupForm = () => {
             setError('')
             localStorage.setItem('authToken', data.token);
             handleLogin(data.user)
-            navigate('/')
+            navigate('/home')
         }).catch((error) => {
+            console.error(error)
             setError(`Email ID or username already exists. Try logging in`)
         })
     }
@@ -75,8 +74,6 @@ const SignupForm = () => {
           <div/>
           <p>Already a user?
               <span onClick={()=>{navigate('/login')}}>Sign in now</span>
-          </p>
-          <p style={{fontSize:'0.8rem', fontFamily:'ChirpRegular'}}>By continuing, you agree to Twitter's Conditions of Use and Privacy Notice.
           </p>
         </div>
     )

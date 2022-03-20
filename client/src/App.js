@@ -1,8 +1,6 @@
-// noinspection ES6CheckImport
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {HomeScreen, LandingScreen,LoginScreen,SignUpScreen,StatusScreen, ProfileScreen, SettingsScreen} from './pages'
 import {UserContextProvider} from "./context/user";
-
 
 function App() {
   return (

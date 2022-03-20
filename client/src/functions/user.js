@@ -88,26 +88,6 @@ const getProfiles = async (profileArray) => {
     }
 };
 
-
-const getSuggestions = async () => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-    };
-    try {
-        if(!localStorage.getItem('authToken')){
-            return null
-        }
-        const {data} = await api.post('/api/user/getProfiles', {},config);
-        return data
-    } catch (error) {
-        console.error(error);
-        return false
-    }
-};
-
 const getHome = async () => {
     const config = {
         headers: {

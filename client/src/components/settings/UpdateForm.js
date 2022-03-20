@@ -14,7 +14,7 @@ const UpdateForm = () => {
     const [pictureData, setPicture] = useState(picture);
     const [error, setError] = useState("");
 
-    const register = async event => {
+    const update = async event => {
         event.preventDefault()
         if(!nameData) {
             setError('You must enter a name.');
@@ -22,7 +22,7 @@ const UpdateForm = () => {
         }
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if(!emailData||!re.test(emailData)) {
+        if(!emailData||!re.test(emailData.toString())) {
             setError('You must enter a valid email address.');
             return false;
         }
@@ -44,7 +44,6 @@ const UpdateForm = () => {
             formData.append("tags", `review`);
             formData.append("upload_preset", "e2wh4uwf"); // Replace the preset name with your own
             formData.append("api_key", "1234567"); // Replace API key with your own Cloudinary key
-
             const response = await axios.post(
                 "https://api.cloudinary.com/v1_1/dwajyh7fn/image/upload",
                 formData,
@@ -85,7 +84,7 @@ const UpdateForm = () => {
                 placeholder={'Email'}
             />
             <p id={'signupScreen__error'}>{error}</p>
-            <button onClick={register}>Update Profile</button>
+            <button onClick={update}>Update Profile</button>
         </div>
     )
 }

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './styles/ProfileScreen.css'
 import {Sidebar} from '../components/app'
-import {Main} from "../components/profile";
+import Main from "../components/profile/Main";
 import {user} from "../functions";
 import {useParams} from "react-router-dom";
 import {useUser} from "../context/user";
-
 
 const ProfileScreen = ({self}) => {
     const {id} = useUser();

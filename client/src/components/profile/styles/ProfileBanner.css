@@ -8,6 +8,7 @@
     height: 100px;
     border-radius: 50px;
     margin: 10px 10px;
+    object-fit: cover;
 }
 .profile__banner > div {
     display: flex;
@@ -17,13 +18,13 @@
 }
 .profile__banner > div > p {
     margin: 0 0;
-    font-family: ChirpBold;
+    font-family: ChirpBold, sans-serif;
     font-size: 25px;
     font-weight: bold;
 }
 .profile__banner > div > .handle {
     margin: 0 0;
-    font-family: ChirpBold;
+    font-family: ChirpBold,sans-serif;
     font-size: 15px;
     font-weight: normal;
 }

@@ -5,7 +5,7 @@
     width: 25%;
 }
 .more > h3 {
-    font-family: ChirpBold;
+    font-family: ChirpBold, sans-serif;
     width: 100%;
     text-align: center;
 }

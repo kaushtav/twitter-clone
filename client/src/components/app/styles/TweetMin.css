@@ -16,6 +16,7 @@
     width: 48px;
     height: 48px;
     border-radius: 24px;
+    object-fit: cover;
 }
 
 
@@ -28,6 +29,10 @@
     font-size: 15px;
     color: black;
 }
+.tweet__details > .tweet__userName:hover {
+    text-decoration: underline;
+}
+
 .tweet__details > span{
     font-family: ChirpRegular, sans-serif;
     color: #5c5c5c;

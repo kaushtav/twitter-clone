@@ -8,19 +8,16 @@
     z-index: 100;
     padding: 20px 10px;
 }
-
 .header > h2 {
-    font-family: ChirpBold;
+    font-family: ChirpBold, sans-serif;
     color: #262626;
     font-weight: 350;
 }
 .buttonh {
     cursor: pointer;
 }
-
 .header__logo {
     width: 100px;
     object-fit: contain;
-    margin: 0 20px;
-    margin-top: 18px;
+    margin: 18px 20px 0 20px;
 }

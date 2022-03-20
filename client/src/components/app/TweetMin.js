@@ -9,11 +9,8 @@ import {useUser} from "../../context/user";
 import {tweet as tweetFunc, user} from "../../functions";
 import {format} from "date-fns";
 
-
 const TweetMin = ({tweet}) => {
     const navigate = useNavigate();
-    console.log();
-
     const {likedList} = useUser();
     const likeCheck = likedList.includes(tweet._id);
     const [liked, setLiked] = useState(likeCheck)
@@ -34,11 +31,11 @@ const TweetMin = ({tweet}) => {
 
     return(
       <div className={'tweet'} >
-          <img src={tweet.picture} alt={tweet.userHandle}  onClick={()=>navigate(`/user/${tweet.userID}`)}/>
+          <img src={tweet.picture} alt={tweet.handle}  onClick={()=>navigate(`/user/${tweet.userID}`)}/>
           <div className={'tweet__details'} onClick={()=>navigate(`/status/${tweet._id}`)}>
               <span className={'tweet__userName'}>{tweet.name}</span>
               <span> @{tweet.handle}</span>
-              <span>{'  ·  '+format(new Date(tweet.timestamp), 'hh:mm bbb d MMM')}</span>
+              <span>{'  ·  '+format(new Date(tweet.timestamp), 'hh:mmaa d MMM')}</span>
               <div className={'tweet__content'}>
                   <span>{tweet.text}</span>
                   {tweet.images.length?<img src={tweet.images[0]} alt={'tweet'}/>:null}
@@ -58,7 +55,7 @@ const TweetMin = ({tweet}) => {
                   <span>{tweet.likes}</span>
               </div>
               <div >
-                  <img src={Share}/>
+                  <img src={Share} alt={'share'}/>
               </div>
           </div>
       </div>

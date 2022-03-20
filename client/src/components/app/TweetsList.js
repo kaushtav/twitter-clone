@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './styles/TweetsList.css'
 import {TweetMin} from  '../app'
 

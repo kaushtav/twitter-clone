@@ -7,7 +7,7 @@ import './styles/ProfileMin.css'
 const ProfileMin = ({user, button}) => {
     const {handleLogout} = useUser();
     const navigate = useNavigate();
-   return(
+    return(
        <div className={button?'profile button':'profile'} onClick={()=> {
            if (button) {
                handleLogout();
@@ -25,7 +25,7 @@ const ProfileMin = ({user, button}) => {
            </div>
            {button && <More style={{marginLeft: '20px'}} height={'20px'}/>}
        </div>
-   )
+    )
 };
 
 export default ProfileMin;

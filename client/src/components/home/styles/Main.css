@@ -2,8 +2,16 @@
     border-left: 1px rgb(231, 231, 231) solid;
     border-right: 1px #e7e7e7 solid;
     width: 40%;
+    min-width: 40%;
     margin-left: 25%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+.main > span {
+    font-family: ChirpBold, sans-serif;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
 }

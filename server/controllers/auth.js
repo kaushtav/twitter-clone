@@ -9,20 +9,19 @@ exports.signIn = async (req, res, next) => {
     }
     try {
         const user = await User.findOne({ handle }).select('+password');
-        //TODO:Handle errors
         if (!user) {
             return next(new ErrorResponse('Invalid Credentials', 401));
         }
         const isMatch = await user.matchPasswords(password);
+        console.log(isMatch)
         if (!isMatch) {
             return next(new ErrorResponse('Invalid Credentials', 401));
         }
         sendToken(user, 200, res);
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-        });
+        console.log(error);
+        error.status = 403;
+        next(error);
     }
 }
 

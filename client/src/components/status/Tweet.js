@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import './styles/Tweet.css'
 import {ProfileMin} from "../app";
 import {ReactComponent as Replies} from '../../assets/icons/tweet/replies.svg'

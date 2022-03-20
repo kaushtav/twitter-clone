@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
-
 import './styles/More.css'
 import {user} from "../../functions";
 import ProfilesList from "./ProfilesList";
 
 const More = () => {
-
     const [profilesData, setProfilesData] = useState([])
-
     useEffect(() => {
         user.getProfiles().then((profiles)=>{
             setProfilesData(profiles.profiles)

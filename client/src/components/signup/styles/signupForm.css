@@ -88,6 +88,8 @@
 }
 #signupScreen__error {
     color: black;
+    font-family: 'ChirpRegular', sans-serif;
+    font-size:14px;
 }
 @media (max-width: 1000px) {
     .signupScreen__form {

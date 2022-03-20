@@ -6,7 +6,7 @@ import {Header, TweetsList} from "../app";
 import {tweet, user} from "../../functions";
 import {useUser} from "../../context/user";
 
-const Main = ({tweetData, profileData, replies}) => {
+const Main = ({tweetData, profileData, replies, reload}) => {
 
     const {likedList} = useUser();
     const likeCheck = likedList.includes(tweetData._id);
@@ -43,7 +43,7 @@ const Main = ({tweetData, profileData, replies}) => {
         <div className={'status__main'}>
             <Header text={'Tweet'}/>
             <Tweet user={profileData} tweet={tweetDetails} liked={liked} handleLike={handleLike} handleRetweet={handleRetweet}/>
-            <CreateReply profile={profileData} tweet={tweetDetails}/>
+            <CreateReply profile={profileData} tweet={tweetDetails} reload={reload}/>
             <TweetsList tweets={replies}/>
         </div>
     )

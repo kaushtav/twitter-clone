@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/StatusScreen.css'
 import {Sidebar} from '../components/app'
-import {Main} from '../components/settings'
+import Main from '../components/settings/Main'
 
 
 const StatusScreen = () => {
