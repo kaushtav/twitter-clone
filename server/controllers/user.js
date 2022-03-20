@@ -104,6 +104,7 @@ exports.getHome = async (req, res, next)=> {
                             name: "$retweetProfile.name",
                             handle: "$retweetProfile.handle",
                             picture: "$retweetProfile.picture",
+                            userID: "$retweetProfile._id",
                         }
                     }
                 },
@@ -138,6 +139,7 @@ exports.getHome = async (req, res, next)=> {
                             name: "$replyProfile.name",
                             handle: "$replyProfile.handle",
                             picture: "$replyProfile.picture",
+                            userID: "$replyProfile._id",
                         }
                     }
                 },
@@ -223,6 +225,7 @@ exports.getProfile = async (req, res, next)=> {
                             name: "$retweetProfile.name",
                             handle: "$retweetProfile.handle",
                             picture: "$retweetProfile.picture",
+                            userID: "$retweetProfile._id",
                         }
                     }
                 },
@@ -257,6 +260,7 @@ exports.getProfile = async (req, res, next)=> {
                             name: "$replyProfile.name",
                             handle: "$replyProfile.handle",
                             picture: "$replyProfile.picture",
+                            userID: "$replyProfile._id",
                         }
                     }
                 },

@@ -49,7 +49,7 @@ const TweetMin = ({tweet, retweet, reply}) => {
                   <span onClick={()=>navigate(`/user/${tweet.userID}`)}> @{tweet.handle}</span>
                   <span>{'  ·  '+format(new Date(tweet.timestamp), 'hh:mmaa d MMM')}</span>
                   {tweet.retweetFrom&&Object.keys(tweet.retweetFrom).length?
-                      <div className={'tweet__content'} onClick={()=>navigate(`/status/${tweet.retweetFrom._id}`)}>
+                      <div className={'tweet__content'}>
                         <span className={'tweet__retweeted'}>
                           Retweeted
                           <img src={Retweets} alt={'re'}/>
