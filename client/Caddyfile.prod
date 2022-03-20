@@ -1,5 +1,5 @@
-ec2-13-233-216-132.ap-south-1.compute.amazonaws.com:443 {
-  tls kaushtav@mylastpage.in
+twitter-clone-kaushtav.in:443 {
+  tls vickyatri.com@gmail.com
   root * /srv
   route {
     reverse_proxy /api* server:4000

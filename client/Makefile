@@ -12,5 +12,5 @@ build-production:
 	docker build \
 		-t client-prod:prod \
 		--build-arg CADDYFILE=Caddyfile.prod \
-		--build-arg BASE_URL=https://ec2-13-233-216-132.ap-south-1.compute.amazonaws.com \
+		--build-arg BASE_URL=https://twitter-clone-kaushtav.in \
 		-f Dockerfile.prod .
