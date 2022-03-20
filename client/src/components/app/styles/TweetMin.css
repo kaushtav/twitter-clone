@@ -1,6 +1,6 @@
 .tweet {
     position: relative;
-    border-top: 1px #e7e7e7 solid;
+    border-bottom: 1px #e7e7e7 solid;
     max-width:75%;
     min-width: 75%;
     padding:20px 68px 20px 68px;
@@ -9,16 +9,54 @@
     background-color: rgba(0,0,0,0.1);
     cursor: pointer;
 }
-.tweet > img {
+.retweet {
+    border: 1px rgba(0,0,0,0.2) solid;
+    margin:10px 0;
+    border-radius: 10px;
+}
+.retweet:hover {
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+}
+.reply {
+    max-width: 100%;
+    width: 100%;
+    border: 1px rgba(0,0,0,0) solid;
+    padding:0;
+    height: fit-content;
+}
+.reply:hover {
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+}
+.reply>.reply__line {
     position: absolute;
-    top: 20px;
-    left: 10px;
+    top: 50px;
+    left: -36px;
+    height: 100%;
+    background-color: #c7c6c6;
+    width: 2px;
+}
+
+.tweet__container {
+    position: relative;
+}
+.tweet__container > img {
+    position: absolute;
+    top: 0;
+    left: -60px;
     width: 48px;
     height: 48px;
     border-radius: 24px;
     object-fit: cover;
 }
 
+.tweet__reactTooltip {
+    font-family: ChirpBold, sans-serif;
+    border: black 1px solid;
+    padding: 100px;
+    opacity: 0;
+}
 
 .tweet__details {
 
@@ -51,11 +89,13 @@
     font-weight: 300;
     font-size: 14px;
 }
-.tweet__content > img {
+.tweet__image {
     margin: 5% 0;
     max-width: 100%;
-    max-height: 400px;
+    /*max-height: 400px;*/
     border-radius: 20px;
+    object-fit: cover;
+    border:1px #d5d4d4 solid;
 }
 
 
@@ -80,4 +120,15 @@
 .tweet__footer > div > span {
     font-family: ChirpMedium, sans-serif;
     color: #5c5c5c;
+}
+
+.tweet__retweeted {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+.tweet__retweeted >img {
+    height: 15px;
+    padding-left: 5px;
+
 }

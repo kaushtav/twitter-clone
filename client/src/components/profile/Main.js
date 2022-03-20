@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles/Main.css'
 import ProfileBanner from "./ProfileBanner";
 import {TweetsList, ProfilesList, Header} from "../app";
 import {useUser} from "../../context/user";
 import {user} from "../../functions";
 
-const Main = ({profile, tweets, followers}) => {
+const Main = ({profile, tweets, followers, followings}) => {
     const {id,name,handle,picture, followingList,updateUser} = useUser();
     const followCheck = followingList.includes(profile._id);
     const [following, setFollowing] = useState(followCheck);
     const [view, setView] = useState('tweets');
+
+    useEffect(()=>{
+        setView('tweets')
+    },[profile._id])
 
     const handleFollow = () => {
         user.followUser(profile._id).then(() => {});
@@ -44,13 +48,32 @@ const Main = ({profile, tweets, followers}) => {
                 <span><span>{profile.following}</span> following</span>
             </div>
             <div className={'profile__profileViews'}>
-                <span onClick={()=>{setView('tweets')}}>Tweets</span>
-                <span onClick={()=>{setView('followers')}}>Followers</span>
+                <span
+                    onClick={()=>{setView('tweets')}}
+                    style={{background:view==='tweets'?'rgba(0,0,0,0.2)':null}}>
+                    Tweets
+                </span>
+                <span
+                    onClick={()=>{setView('followers')}}
+                    style={{background:view==='followers'?'rgba(0,0,0,0.2)':null}}>
+                    Followers
+                </span>
+                <span
+                    onClick={()=>{setView('followings')}}
+                    style={{background:view==='followings'?'rgba(0,0,0,0.2)':null}}>
+                    Followings
+                </span>
             </div>
-            {view === 'tweets'?
-                <TweetsList tweets={tweets}/>:
-                <ProfilesList profiles={followers}/>
-            }
+            {(()=>{
+                switch(view){
+                    case 'tweets':
+                        return <TweetsList tweets={tweets}/>
+                    case 'followers':
+                        return <ProfilesList profiles={followers}/>
+                    case 'followings':
+                        return <ProfilesList profiles={followings}/>
+                }
+            })()}
         </div>
     )
 };

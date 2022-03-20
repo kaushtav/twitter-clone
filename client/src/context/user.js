@@ -12,6 +12,7 @@ const actions = {
     UPDATE_PICTURE: 'UPDATE_PICTURE',
     UPDATE_FOLLOWING: 'UPDATE_FOLLOWING',
     UPDATE_LIKED: 'UPDATE_LIKED',
+    UPDATE_RETWEET: 'UPDATE_RETWEET',
 };
 
 function reducer(state, action) {
@@ -31,6 +32,8 @@ function reducer(state, action) {
             return {...state,followingList:action.value};
         case actions.UPDATE_LIKED:
             return {...state,likedList:action.value};
+        case actions.UPDATE_RETWEET:
+            return {...state,retweetList:action.value};
         default:
             return state;
     }
@@ -46,7 +49,8 @@ export const UserContextProvider = (props) => {
         email: undefined,
         picture: 'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png',
         followingList:[],
-        likedList:[]
+        likedList:[],
+        retweetList:[],
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -59,6 +63,7 @@ export const UserContextProvider = (props) => {
         await dispatch({type:'UPDATE_PICTURE', value:user.picture});
         await dispatch({type:'UPDATE_FOLLOWING', value:user.followingList});
         await dispatch({type:'UPDATE_LIKED', value:user.likedList});
+        await dispatch({type:'UPDATE_RETWEET', value:user.retweetList});
         setLoading(false);
     };
     const handleLogout = () => {
@@ -69,6 +74,7 @@ export const UserContextProvider = (props) => {
         dispatch({type:'UPDATE_HANDLE', value:undefined});
         dispatch({type:'UPDATE_FOLLOWING', value:undefined});
         dispatch({type:'UPDATE_LIKED', value:undefined});
+        dispatch({type:'UPDATE_RETWEET', value:undefined});
         setLoading(false);
     };
 
@@ -91,6 +97,7 @@ export const UserContextProvider = (props) => {
         handle:state.handle,
         followingList: state.followingList,
         likedList: state.likedList,
+        retweetList: state.retweetList,
         handleLogin:handleLogin,
         handleLogout:handleLogout,
         updateUser:updateUser,

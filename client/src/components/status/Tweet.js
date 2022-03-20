@@ -6,7 +6,7 @@ import {ReactComponent as Retweets} from '../../assets/icons/tweet/retweets.svg'
 import {ReactComponent as Likes} from '../../assets/icons/tweet/likes.svg'
 import {ReactComponent as Share} from '../../assets/icons/tweet/share.svg'
 
-const Tweet = ({user, tweet, liked, handleLike, handleRetweet}) => {
+const Tweet = ({user, tweet, liked, retweeted, handleLike, handleRetweet}) => {
 
     return(
         <div className={'status__tweet'} >
@@ -25,8 +25,8 @@ const Tweet = ({user, tweet, liked, handleLike, handleRetweet}) => {
             </div>
             <div className={'status__buttons'}>
                 <Replies/>
-                <Retweets onClick={handleRetweet}/>
-                <Likes className={liked?'liked':''} onClick={handleLike} fill={liked?'red':'black'}/>
+                <Retweets onClick={handleRetweet}  style={{background:retweeted?'#bcccea':'transparent'}} />
+                <Likes className={liked?'liked':''} onClick={handleLike} style={{background:liked?'#f3c3c3':'transparent'}}/>
                 <Share/>
             </div>
         </div>

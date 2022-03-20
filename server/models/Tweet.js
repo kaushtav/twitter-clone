@@ -34,11 +34,10 @@ const TweetSchema = new mongoose.Schema({
         default:0
     },
     repliedTo: {
-        type:String
+        type:mongoose.Schema.Types.ObjectId,
     },
-    repliedUser: {
-        type:String,
-        default:0
+    retweetFrom: {
+        type:mongoose.Schema.Types.ObjectId,
     },
     repliesList: {
         type: Array,

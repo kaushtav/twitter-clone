@@ -35,3 +35,9 @@
     font-family: ChirpMedium, sans-serif;
     font-weight: 600;
 }
+.logout {
+    margin-left: 20px;
+    background: #e20000;
+    padding:10px 8px 10px 7px;
+    border-radius: 20px;
+}

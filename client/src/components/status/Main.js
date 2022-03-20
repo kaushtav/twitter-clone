@@ -8,22 +8,23 @@ import {useUser} from "../../context/user";
 
 const Main = ({tweetData, profileData, replies, reload}) => {
 
-    const {likedList} = useUser();
+    const {likedList, retweetList} = useUser();
     const likeCheck = likedList.includes(tweetData._id);
+    const retweetCheck = retweetList.includes(tweetData._id);
     const [liked, setLiked] = useState(likeCheck)
+    const [retweeted, setRetweeted] = useState(retweetCheck)
 
     const handleLike = () => {
-
         liked?tweetData.likes--:tweetData.likes++;
         liked?tweet.unlikeTweet(tweetData._id):tweet.likeTweet(tweetData._id);
         setLiked(!liked)
     };
 
     const handleRetweet = () => {
+        if(retweeted) {return false}
         user.createTweet({text:tweetData.text, images:tweetData.images,retweetFrom:tweetData._id}).then(()=>{
-            setLiked(true)
             tweetData.retweets++
-            setLiked(false)
+            setRetweeted(true)
         })
     }
 
@@ -42,7 +43,7 @@ const Main = ({tweetData, profileData, replies, reload}) => {
     return(
         <div className={'status__main'}>
             <Header text={'Tweet'}/>
-            <Tweet user={profileData} tweet={tweetDetails} liked={liked} handleLike={handleLike} handleRetweet={handleRetweet}/>
+            <Tweet user={profileData} tweet={tweetDetails} liked={liked} retweeted={retweeted} handleLike={handleLike} handleRetweet={handleRetweet}/>
             <CreateReply profile={profileData} tweet={tweetDetails} reload={reload}/>
             <TweetsList tweets={replies}/>
         </div>

@@ -1,4 +1,10 @@
+// const User = require("../models/User");
+// const Tweets = require("../models/Tweet");
+
 let express = require('express');
+
+
+
 
 const ping = async (req, res) => {
   return res.status(200).send(true)

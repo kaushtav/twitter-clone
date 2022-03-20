@@ -11,7 +11,7 @@
 }
 .status__tweetDetails >span {
     margin: 25px 0;
-    font-family: ChirpBold;
+    font-family: ChirpBold, sans-serif;
     font-size: 18px;
     font-weight: 500;
 

@@ -9,15 +9,17 @@ exports.getUser = async (req, res)=>{
     });
 }
 exports.createTweet = async (req, res, next)=>{
-    const {text, images, repliedUser,repliedTo, retweetFrom} = req.body.tweet;
+    const {text, images, repliedTo, retweetFrom} = req.body.tweet;
     //TODO: extract mentions and tags
     try {
+
+        const user = await User.findById(req.user.id);
         const {_id} = await Tweet.create({
             userID:mongoose.Types.ObjectId(req.user.id),
             text,
             images,
             repliedTo,
-            repliedUser,
+            retweetFrom,
             timestamp:Date.now()
         });
         if(repliedTo){
@@ -40,7 +42,7 @@ exports.createTweet = async (req, res, next)=>{
             reTweet.save()
 
         }
-        const user = await User.findById(req.user.id);
+        user.retweetList.push(retweetFrom)
         user.tweets++;
         user.save();
         return res.status(200).json({id:_id})
@@ -58,6 +60,9 @@ exports.getHome = async (req, res, next)=> {
         const item = await Tweet.aggregate(
             [
                 {$match: {userID: {$in: [...req.user.followingList, req.user._id]}}},
+                // {$match: {_id: new mongoose.Types.ObjectId('62374842a12af3d48fc71446') }}, //retweet example
+                // {$match: {_id: new mongoose.Types.ObjectId('623708d8d5a3639f68f55a1e') }}, //tweet example
+                // {$match: {_id: new mongoose.Types.ObjectId('6237624e140e5bfd9932ced5') }}, //reply example
                 {
                     $lookup: {
                         from: 'users',
@@ -68,6 +73,74 @@ exports.getHome = async (req, res, next)=> {
                 },
                 {$unwind: "$profile"},
                 {$addFields: {"name": "$profile.name", "handle": "$profile.handle", "picture": "$profile.picture"}},
+                {
+                    $lookup: {
+                        from: 'tweets',
+                        localField: 'retweetFrom',
+                        foreignField: '_id',
+                        as: "retweetData"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'retweetData.userID',
+                        foreignField: '_id',
+                        as: "retweetProfile"
+                    }
+                },
+                {$unwind: {path:"$retweetData", preserveNullAndEmptyArrays: true}},
+                {$unwind: {path:"$retweetProfile", preserveNullAndEmptyArrays: true}},
+                {
+                    $set: {
+                        retweetFrom: {
+                            _id:"$retweetData._id",
+                            images:"$retweetData.images",
+                            text:"$retweetData.text",
+                            replies:"$retweetData.replies",
+                            retweets:"$retweetData.retweets",
+                            likes:"$retweetData.likes",
+                            timestamp:"$retweetData.timestamp",
+                            name: "$retweetProfile.name",
+                            handle: "$retweetProfile.handle",
+                            picture: "$retweetProfile.picture",
+                        }
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'tweets',
+                        localField: 'repliedTo',
+                        foreignField: '_id',
+                        as: "replyData"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'replyData.userID',
+                        foreignField: '_id',
+                        as: "replyProfile"
+                    }
+                },
+                {$unwind: {path:"$replyData", preserveNullAndEmptyArrays: true}},
+                {$unwind: {path:"$replyProfile", preserveNullAndEmptyArrays: true}},
+                {
+                    $set: {
+                        repliedTo: {
+                            _id:"$replyData._id",
+                            images:"$replyData.images",
+                            text:"$replyData.text",
+                            replies:"$replyData.replies",
+                            retweets:"$replyData.retweets",
+                            likes:"$replyData.likes",
+                            timestamp:"$replyData.timestamp",
+                            name: "$replyProfile.name",
+                            handle: "$replyProfile.handle",
+                            picture: "$replyProfile.picture",
+                        }
+                    }
+                },
                 {$sort: {timestamp: -1}},
                 {
                     $project: {
@@ -82,6 +155,8 @@ exports.getHome = async (req, res, next)=> {
                         name: 1,
                         handle: 1,
                         picture: 1,
+                        repliedTo:1,
+                        retweetFrom:1,
                     }
                 },
                 {
@@ -92,6 +167,7 @@ exports.getHome = async (req, res, next)=> {
                 },
             ]
         );
+        console.log(item[0].data)
         return res.status(200).json({
             success: true,
             tweets: item[0].data,
@@ -116,26 +192,81 @@ exports.getProfile = async (req, res, next)=> {
             [
                 { $match: {"userID" : profile._id}},
                 {$addFields:{"name":profile.name, "handle":profile.handle, "picture":profile.picture}},
-                { $sort: { timestamp:-1 }},
-                { $project: {_id:1,
-                        images:1,
-                        text:1,
-                        userID:1,
-                        replies:1,
-                        retweets:1,
-                        likes:1,
-                        timestamp:1,
-                        name:1,
-                        handle:1,
-                        picture:1,
-                    } },
+                {
+                    $lookup: {
+                        from: 'tweets',
+                        localField: 'retweetFrom',
+                        foreignField: '_id',
+                        as: "retweetData"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'retweetData.userID',
+                        foreignField: '_id',
+                        as: "retweetProfile"
+                    }
+                },
+                {$unwind: {path:"$retweetData", preserveNullAndEmptyArrays: true}},
+                {$unwind: {path:"$retweetProfile", preserveNullAndEmptyArrays: true}},
+                {
+                    $set: {
+                        retweetFrom: {
+                            _id:"$retweetData._id",
+                            images:"$retweetData.images",
+                            text:"$retweetData.text",
+                            replies:"$retweetData.replies",
+                            retweets:"$retweetData.retweets",
+                            likes:"$retweetData.likes",
+                            timestamp:"$retweetData.timestamp",
+                            name: "$retweetProfile.name",
+                            handle: "$retweetProfile.handle",
+                            picture: "$retweetProfile.picture",
+                        }
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'tweets',
+                        localField: 'repliedTo',
+                        foreignField: '_id',
+                        as: "replyData"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'replyData.userID',
+                        foreignField: '_id',
+                        as: "replyProfile"
+                    }
+                },
+                {$unwind: {path:"$replyData", preserveNullAndEmptyArrays: true}},
+                {$unwind: {path:"$replyProfile", preserveNullAndEmptyArrays: true}},
+                {
+                    $set: {
+                        repliedTo: {
+                            _id:"$replyData._id",
+                            images:"$replyData.images",
+                            text:"$replyData.text",
+                            replies:"$replyData.replies",
+                            retweets:"$replyData.retweets",
+                            likes:"$replyData.likes",
+                            timestamp:"$replyData.timestamp",
+                            name: "$replyProfile.name",
+                            handle: "$replyProfile.handle",
+                            picture: "$replyProfile.picture",
+                        }
+                    }
+                },
+                {$sort: {timestamp: -1}},
                 { $facet: {
                         metadata: [ { $count: "total" } ],
                         data: [ { $skip: (page-1)*perPage }, { $limit: perPage } ]
                     }},
             ]
         );
-
         return res.status(200).json({
             success:true,
             profile,

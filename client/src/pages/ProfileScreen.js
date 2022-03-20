@@ -14,13 +14,16 @@ const ProfileScreen = ({self}) => {
     const [profileData, setProfileData] = useState({});
     const [tweetsData, setTweetsData] = useState([]);
     const [followerData, setFollowerData] = useState([]);
+    const [followingData, setFollowingData] = useState([]);
 
     const reload = async () => {
         const {profile,tweets} = await user.getProfile(profileID);
         setProfileData(profile);
         setTweetsData(tweets);
-        const {profiles} = await user.getProfiles(profile.followerList);
-        setFollowerData(profiles);
+        const data = await user.getProfiles(profile.followerList);
+        setFollowerData(data.profiles);
+        const dataF = await user.getProfiles(profile.followingList);
+        setFollowingData(dataF.profiles);
         setLoading(false)
     };
 
@@ -34,7 +37,7 @@ const ProfileScreen = ({self}) => {
     return(
         <div className={'profileScreen'}>
             <Sidebar />
-            <Main profile={profileData} tweets={tweetsData} followers={followerData} />
+            <Main profile={profileData} tweets={tweetsData} followers={followerData} followings={followingData} />
         </div>)
 };
 

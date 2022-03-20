@@ -1,21 +1,18 @@
 import React from "react";
-import {ReactComponent as More} from "../../assets/icons/sidebar/more.svg";
 import {useNavigate} from "react-router-dom";
-import {useUser} from "../../context/user";
+import ReactTooltip from 'react-tooltip';
 import './styles/ProfileMin.css'
 
-const ProfileMin = ({user, button}) => {
-    const {handleLogout} = useUser();
+const ProfileMin = ({user}) => {
     const navigate = useNavigate();
     return(
-       <div className={button?'profile button':'profile'} onClick={()=> {
-           if (button) {
-               handleLogout();
-               navigate('/')
-           } else {
-               navigate(`/user/${user._id}`);
-           }
-       }}>
+       <div className={'profile'}  onClick={()=> {navigate(`/user/${user._id}`)}}>
+           <ReactTooltip
+               id={'logout'}
+               className={'tweet__reactTooltip'}
+               place={'bottom'}
+               backgroundColor={'rgba(0,0,0,0.4)'}
+           />
            <div>
                <img src={user.picture} alt={'user'}/>
                <div>
@@ -23,7 +20,6 @@ const ProfileMin = ({user, button}) => {
                    <p>@{user.handle}</p>
                </div>
            </div>
-           {button && <More style={{marginLeft: '20px'}} height={'20px'}/>}
        </div>
     )
 };

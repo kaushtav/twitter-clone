@@ -1,24 +1,16 @@
 @font-face {
     font-family: 'ChirpRegular';
     src: local('ChirpRegular'), url(./assets/fonts/chirp-regular-web.ttf) format('ttf');
-    /* other formats include: 'woff2', 'truetype, 'opentype',
-                              'embedded-opentype', and 'svg' */
 }
 @font-face {
     font-family: 'ChirpMedium';
     src: local('ChirpMedium'), url(./assets/fonts/chirp-medium-web.ttf) format('ttf');
-    /* other formats include: 'woff2', 'truetype, 'opentype',
-                              'embedded-opentype', and 'svg' */
 }
 @font-face {
     font-family: 'ChirpBold';
     src: local('ChirpBold'), url(./assets/fonts/chirp-bold-web.ttf) format('ttf');
-    /* other formats include: 'woff2', 'truetype, 'opentype',
-                              'embedded-opentype', and 'svg' */
 }
 @font-face {
     font-family: 'ChirpHeavy';
     src: local('ChirpHeavy'), url(./assets/fonts/chirp-heavy-web.ttf) format('ttf');
-    /* other formats include: 'woff2', 'truetype, 'opentype',
-                              'embedded-opentype', and 'svg' */
 }

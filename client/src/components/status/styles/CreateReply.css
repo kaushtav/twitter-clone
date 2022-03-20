@@ -2,7 +2,7 @@
     display: flex;
     position: relative;
     min-width: 75%;
-    padding:20px 0 60px 68px;
+    padding:20px 0 80px 68px;
     border-bottom: 1px #e7e7e7 solid;
 }
 .tweets__createReply > textarea {
@@ -67,4 +67,21 @@
 .tweets__createReply .images:hover {
     cursor: pointer;
     background-color: rgb(25, 141, 210,0.2);
+}
+.uploadsReply {
+    position: absolute;
+    left: 40px;
+    bottom: 1px;
+    display: flex;
+    padding: 5px 5px;
+    overflow: hidden;
+}
+.uploadsReply > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 0 2px;
+    border: 1px #737373 solid;
+    object-fit: cover;
+
 }

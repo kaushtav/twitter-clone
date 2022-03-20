@@ -63,3 +63,17 @@
     cursor: pointer;
     background-color: rgb(25, 141, 210,0.2);
 }
+.uploads {
+    display: flex;
+    padding: 5px 5px;
+    overflow: hidden;
+}
+.uploads > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 0 2px;
+    border: 1px #737373 solid;
+    object-fit: cover;
+
+}
